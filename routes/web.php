@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Datainfo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    $data = Datainfo::all();
+    return view('home', ["data" => $data]);
+})->name("home");
+Route::POST('/adddata', 'datacontroller@adddata')->name('adddata');
+
+Route::GET('/printpdf', 'datacontroller@printpdf')->name('printpdf');
